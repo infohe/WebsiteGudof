@@ -1,7 +1,22 @@
 import Head from 'next/head'
+import React from "react";
+
 import styles from '../styles/Home.module.css'
 import Navbar from './layouts/Navbar'
+import DrawerComponent from './layouts/Drawer'
+import Footer from './layouts/Footer';
+import ListofItems from './layouts/ListofItems';
 export default function Home() {
+ 
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
   return (
     // <div className={styles.container}>
     //   <Head>
@@ -64,7 +79,10 @@ export default function Home() {
     //   </footer>
     // </div>
     <div>
-      <Navbar/>
+      <Navbar menuButton={handleDrawerOpen}/>
+      <DrawerComponent open={open} handleDrawerClose={handleDrawerClose}/>
+      <Footer/>
+      <ListofItems/>
     </div>
 
   )

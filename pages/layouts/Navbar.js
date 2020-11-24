@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
 import { ArrowDropDown } from "@material-ui/icons";
 
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1, 
@@ -21,17 +22,31 @@ const useStyles = makeStyles((theme) => ({
   },
   padding: {
     paddingRight:theme.spacing(3)
-  }
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
 }));
 
-export default function Navbar() {
+export default function Navbar(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={props.menuButton}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
@@ -45,13 +60,13 @@ export default function Navbar() {
           </Typography>
           <Typography edge="end" variant="h6" className={classes.padding}>
             News
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            <IconButton edge="start" color="inherit">
             <ArrowDropDown />
           </IconButton>
           </Typography>
           <Typography edge="end" variant="h6" className={classes.padding}>
             Next
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            <IconButton edge="start" color="inherit">
             <ArrowDropDown />
           </IconButton>
           </Typography>
